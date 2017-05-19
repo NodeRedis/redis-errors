@@ -3,6 +3,8 @@
 
 # redis-errors
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/NodeRedis/redis-errors.svg)](https://greenkeeper.io/)
+
 All error classes used in [node_redis](https://github.com/NodeRedis/node_redis) are in here. They can be required as needed.
 
 ## Install
