@@ -3,7 +3,7 @@
 
 # redis-errors
 
-All error classes used in [node_redis](https://github.com/NodeRedis/node_redis) are in here. They can be required as needed.
+All error classes used in [node_redis](https://github.com/NodeRedis/node_redis) from v.3.0.0 are in here. They can be required as needed.
 
 ## Install
 
