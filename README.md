@@ -14,26 +14,48 @@ Install with [NPM](https://npmjs.org/):
 ## Usage
 
 ```js
-const { RedisError, ReplyError } = require('redis-errors');
+const { ReplyError, InterruptError } = require('redis-errors');
 
 // Using async await
 try {
-  return client.set('foo') // Missing value
+  await client.set('foo') // Missing value
 } catch (err) {
+  if (err instanceof InterruptError) {
+    console.error('Command might have been processed')
+  }
   if (err instanceof ReplyError) {
-    console.log(err)
+    // ...
   }
   throw err
 }
+
+// Using callbacks
+client.set('foo', (err, res) => {
+  if (err) {
+    if (err instanceof InterruptError) {
+      // ...
+    }
+  }
+})
 ```
 
 ### Error classes
 
-* `RedisError` sub class of Error
-* `ReplyError` sub class of RedisError
-* `ParserError` sub class of RedisError
+* `RedisError` subclass of Error
+* `ReplyError` subclass of RedisError
+* `ParserError` subclass of RedisError
+* `AbortError` subclass of RedisError
+* `InterruptError` subclass of AbortError
 
-All Redis errors will be returned as `ReplyErrors` while a parser error is returned as `ParserError`.
+* All errors returned by NodeRedis (client) are `RedisError`s.
+* All errors returned by Redis itself (server) will be a `ReplyError`.
+* Parsing errors are returned as `ParserError`. *Note:* Please report these!
+* If a command was not executed but rejected, it'll return a `AbortError`.
+* All executed commands that could not fulfill (e.g. network drop while
+  executing) return a `InterruptError`.
+  *Note:* Interrupt errors can happen for multiple reasons that are out of the
+  scope of NodeRedis itself. There is nothing that can be done on library side
+  to prevent those.
 
 ## License
 
