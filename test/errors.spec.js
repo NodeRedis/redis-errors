@@ -36,11 +36,21 @@ describe('errors', function () {
     assert(replyError instanceof RedisError)
     assert(parserError instanceof RedisError)
     assert(abortError instanceof RedisError)
+    assert(interruptError instanceof Error)
+    assert(interruptError instanceof RedisError)
     assert(interruptError instanceof AbortError)
   })
 
   it('parser errors should contain properties', function () {
     assert(parserError.offset)
     assert(parserError.buffer)
+  })
+
+  it('first stack line should be the error itself', function () {
+    assert(/at Suite/.test(redisError.stack.split('\n')[1]))
+    assert(/at Suite/.test(replyError.stack.split('\n')[1]))
+    assert(/at Suite/.test(parserError.stack.split('\n')[1]))
+    assert(/at Suite/.test(abortError.stack.split('\n')[1]))
+    assert(/at Suite/.test(interruptError.stack.split('\n')[1]))
   })
 })

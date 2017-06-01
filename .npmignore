@@ -4,7 +4,7 @@
 out
 gen
 
-# Unrelevant files and folders
+# Irrelevant files and folders
 benchmark
 coverage
 test

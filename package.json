@@ -1,6 +1,6 @@
 {
   "name": "redis-errors",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Error classes used in node_redis",
   "main": "index.js",
   "scripts": {
@@ -8,11 +8,11 @@
     "lint": "standard --fix",
     "posttest": "npm run lint && npm run coverage:check",
     "coverage": "node ./node_modules/istanbul/lib/cli.js cover --preserve-comments ./node_modules/mocha/bin/_mocha -- -R spec",
-    "coverage:check": "node ./node_modules/istanbul/lib/cli.js check-coverage --branch 100 --statement 100"
+    "coverage:check": "node ./node_modules/istanbul/lib/cli.js check-coverage --statement 100"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NodeRedis/node-redis-parser.git"
+    "url": "git+https://github.com/NodeRedis/redis-errors.git"
   },
   "keywords": [
     "redis",
